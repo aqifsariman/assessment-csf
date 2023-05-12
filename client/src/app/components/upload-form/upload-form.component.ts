@@ -37,16 +37,32 @@ export class UploadFormComponent implements OnInit {
 
   upload() {
     const formData = new FormData();
-    //@ts-ignore
-    formData.set('name', this.form.get('archive').value);
+    formData.set('name', this.form.get('name')?.value);
+    formData.set('title', this.form.get('title')?.value);
+    formData.set('comments', this.form.get('comments')?.value);
     formData.set('file', this.archiveFile.nativeElement.files[0]);
     console.log('Form Value:', this.form.value);
-    console.log('Uploaded Zip Name: ', formData.get('name'));
-    console.log('Uploaded Zip File: ', formData.get('file'));
+    console.log('Name: ', formData.get('name'));
+    console.log('Title: ', formData.get('title'));
+    console.log('Comments: ', formData.get('comments'));
+    console.log('File: ', formData.get('file'));
 
-    // lastValueFrom(this.http.post('/upload', formData));
+    lastValueFrom(this.http.post('/upload', formData));
   }
 }
+
+// ngOnInit(): void {
+//   this.param$ = this.activatedRoute.params.subscribe((params) => {
+//     this.query = params['query'];
+//     this.response$ = this.searchSvc.getSearchResults(this.query);
+//     console.log(
+//       'Response:',
+//       this.response$.then((value) => {
+//         this.results = value;
+//       })
+//     );
+//   });
+// }
 
 // upload() {
 //   constformData= new FormData();

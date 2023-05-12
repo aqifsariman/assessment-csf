@@ -1,4 +1,4 @@
-package ibf2022.batch1.csf.backend;
+package ibf2022.batch2.csf.backend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
