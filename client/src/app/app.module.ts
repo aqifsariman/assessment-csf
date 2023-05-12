@@ -7,9 +7,10 @@ import { UploadFormComponent } from './components/upload-form/upload-form.compon
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UploadService } from './services/upload.service';
+import { DisplayresponseComponent } from './components/displayresponse/displayresponse.component';
 
 @NgModule({
-  declarations: [AppComponent, UploadFormComponent],
+  declarations: [AppComponent, UploadFormComponent, DisplayresponseComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -14,6 +14,7 @@ export class UploadFormComponent implements OnInit {
   @ViewChild('file') archiveFile!: ElementRef;
   form!: FormGroup;
   response$!: Promise<any>;
+  results!: String;
 
   constructor(
     private fb: FormBuilder,
@@ -41,36 +42,12 @@ export class UploadFormComponent implements OnInit {
     formData.set('title', this.form.get('title')?.value);
     formData.set('comments', this.form.get('comments')?.value);
     formData.set('file', this.archiveFile.nativeElement.files[0]);
-    console.log('Form Value:', this.form.value);
-    console.log('Name: ', formData.get('name'));
-    console.log('Title: ', formData.get('title'));
-    console.log('Comments: ', formData.get('comments'));
-    console.log('File: ', formData.get('file'));
 
-    lastValueFrom(this.http.post('/upload', formData));
+    // this.http.post('/upload', formData);
+    this.uploadSVC.getBundleId(formData).then((val) => {
+      console.log(val);
+    });
+
+    // this.router.navigate(['/bundle/' +]);
   }
 }
-
-// ngOnInit(): void {
-//   this.param$ = this.activatedRoute.params.subscribe((params) => {
-//     this.query = params['query'];
-//     this.response$ = this.searchSvc.getSearchResults(this.query);
-//     console.log(
-//       'Response:',
-//       this.response$.then((value) => {
-//         this.results = value;
-//       })
-//     );
-//   });
-// }
-
-// upload() {
-//   constformData= new FormData();
-//   formData.set(‘name', this.form.get(‘image-file’).value);
-//   ...
-//   formData.set('file', this.imageFile.nativeElement.files[0]);
-//   firstVaulueFrom(
-//   this.http.post('http://localhost:8080/upload', formData)
-//   ).then(() => { ... })
-//   .catch((error) => { ... })
-//   }

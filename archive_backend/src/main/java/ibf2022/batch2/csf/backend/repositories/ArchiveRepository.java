@@ -45,7 +45,6 @@ public class ArchiveRepository {
         Criteria criterial = Criteria.where("bundleId").is(bundleId);
         Query query = Query.query(criterial);
         return mongoTemplate.findOne(query, Document.class, C_ARCHIVES);
-
     }
 
     // TODO: Task 6

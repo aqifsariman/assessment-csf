@@ -41,7 +41,6 @@ public class UploadController {
     public ResponseEntity<String> postUpload(@RequestPart MultipartFile file, @RequestPart String name,
             @RequestPart String title, @RequestPart String comments) {
 
-        String key = "";
         List<String> keyList = new LinkedList<String>();
         try {
             File[] filesExtracted = unzipSvc.unzip(
@@ -52,7 +51,7 @@ public class UploadController {
                 FileInputStream fIS = new FileInputStream(singleFile);
                 String fileName = singleFile.getName();
                 String oriName = fileName.substring(0, fileName.lastIndexOf('.'));
-                key = imageRepo.upload(fIS, fileName, oriName, title, comments);
+                imageRepo.upload(fIS, fileName, oriName, title, comments);
                 String endpoint = "https://bucket-hat.sgp1.digitaloceanspaces.com/" + fileName;
                 keyList.add(endpoint);
             }
@@ -60,7 +59,6 @@ public class UploadController {
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
-        // JsonObject payload = Json.createObjectBuilder().add("fileKey", key).build();
         String payload = archiveRepo.recordBundle(name, title, comments, keyList);
 
         System.out.println("Payload: " + payload.toString());
@@ -68,7 +66,6 @@ public class UploadController {
     }
 
     // TODO: Task 5
-
     @GetMapping(path = "/bundle/:bundleId")
     @CrossOrigin(origins = "*")
     public ResponseEntity<String> uploadSuccess(@RequestParam String bundleId) {

@@ -1,19 +1,14 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { firstValueFrom, lastValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UploadService {
   constructor(private http: HttpClient) {}
+
+  getBundleId(fD: FormData): Promise<any> {
+    return firstValueFrom(this.http.post('/upload', fD));
+  }
 }
-
-// export class SearchService {
-//   constructor(private http: HttpClient) {}
-
-//   getSearchResults(query: string): Promise<any> {
-//     const params = new HttpParams().set('query', query);
-
-//     return lastValueFrom(this.http.get<any>('/api/search', { params }));
-//   }
-// }
