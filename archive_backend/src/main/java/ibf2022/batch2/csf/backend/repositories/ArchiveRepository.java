@@ -9,6 +9,8 @@ import java.util.UUID;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -40,8 +42,10 @@ public class ArchiveRepository {
 
     // TODO: Task 5
     public Document getBundleByBundleId(String bundleId) {
+        Criteria criterial = Criteria.where("bundleId").is(bundleId);
+        Query query = Query.query(criterial);
+        return mongoTemplate.findOne(query, Document.class, C_ARCHIVES);
 
-        return null;
     }
 
     // TODO: Task 6

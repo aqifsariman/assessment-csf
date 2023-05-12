@@ -72,7 +72,7 @@ public class UploadController {
     @GetMapping(path = "/bundle/:bundleId")
     @CrossOrigin(origins = "*")
     public ResponseEntity<String> uploadSuccess(@RequestParam String bundleId) {
-        archiveRepo.getBundleByBundleId(bundleId);
+        return ResponseEntity.ok().body(archiveRepo.getBundleByBundleId(bundleId).toJson());
     }
 
     // TODO: Task 6
